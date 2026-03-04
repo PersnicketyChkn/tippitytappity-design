@@ -6,33 +6,36 @@ tippitytappity is a program to practice typing
 
 ```mermaid
 classDiagram
-  class InputHandler{
-        - userText: string
-        - readInput(): string
+  class TypingTester{
+        - runTest(): Score
   }
   class AccuracyTester{
         - userText: string
         - correctAnswer: string
-        + checkAccuracy(string): string
         - setCorrectAnswer(string)
+        + generateNewString(): void
+        + checkAccuracy(string): double
   }
   class SpeedTester{
         - wpm: double
         - keystrokes: int
         - timeElapsed: TIME
-        + getTypingSpeed()
+        + getTypingSpeed(): int
+  }
+  class Score{
+        THIS IS A STRUCT
+        WPM: int
+        Accuracy: double
   }
   class User{
         + Name: string
         - Password: string
         - email: string
-        - highscore: int
-        + updateHighscore(int): void
+        - scoreHistory: vector ~Score~
+        + addNewScore(Score): void
   }
-  class Scoreboard{
-        + LeaderboardUsers: vector~User~
-        + clearScoreboard(): void
-        + addToScoreboard(User): void
-        + displayScoreboard(): void
-  }
+TypingTester <-- AccuracyTester
+TypingTester <-- SpeedTester
+User <-- Score
+Score <-- TypingTester
 ```
